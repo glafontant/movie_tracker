@@ -8,7 +8,7 @@ module MoviesHelper
         end
     end
 
-    def formatted_released_date(released_date)
-        released_date.strftime("%B %d, %Y" )
+    def year_on(movie)
+        movie.released_on.strftime("%Y")
     end
 end
