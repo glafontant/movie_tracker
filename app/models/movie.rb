@@ -2,7 +2,7 @@ class Movie < ApplicationRecord
 
     RATINGS = %w(G PG PG-13 R NC-17)
     
-    validates :title, :released_on, :description, presence: true
+    validates :title, :released_on, presence: true
     validates :description, length: { minimum: 25 }
     validates :total_gross, numericality: { greater_than_or_equal_to: 0 }
     validates :image_file_name, format: {
@@ -10,7 +10,9 @@ class Movie < ApplicationRecord
       message: "must be a JPG or PNG image"
     }
     validates :rating, inclusion: { in: RATINGS,
-      message: "%{value} is not a valid rating"}
+      message: "is not a valid rating"}
+
+    has_many :reviews, dependent: :destroy
 
     class << self
       def released
