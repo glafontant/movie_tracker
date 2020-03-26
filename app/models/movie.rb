@@ -32,7 +32,20 @@ class Movie < ApplicationRecord
       end
     end
 
+    def cult?
+      reviews.count > 50 && reviews.average(:stars).to_f >= 4.0
+    end
+
     def flop?
-        total_gross < 225_000_000
+        total_gross < 225_000_000 && !cult?
+    end
+
+    def average_stars
+      # nil will be converted to 0.0
+      reviews.average(:stars).to_f
+    end
+
+    def average_stars_as_percent
+      (average_stars / 5.0) * 100
     end
 end
