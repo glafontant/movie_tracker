@@ -1,4 +1,8 @@
 class Movie < ApplicationRecord
+    has_many :reviews, dependent: :destroy
+    has_many :critics, through: :reviews, source: :user
+    has_many :favorites, dependent: :destroy
+    has_many :fans, through: :favorites, source: :user
 
     RATINGS = %w(G PG PG-13 R NC-17)
     
@@ -11,8 +15,6 @@ class Movie < ApplicationRecord
     }
     validates :rating, inclusion: { in: RATINGS,
       message: "is not a valid rating"}
-
-    has_many :reviews, dependent: :destroy
 
     class << self
       def released
