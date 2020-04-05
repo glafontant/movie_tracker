@@ -40,16 +40,24 @@
   </div>
   <aside>
     <% if @fans %>
-        <h4>Fans</h4>
-        <ul>
-          <% @fans.each do |user| %>
-            <li><%= profile_image(user, size: 35) %></li>
-            <li>
-              <%= link_to user.name, user %>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
+      <h4>Fans</h4>
+      <ul>
+        <% @fans.each do |user| %>
+          <li><%= profile_image(user, size: 35) %></li>
+          <li>
+            <%= link_to user.name, user %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+    <% if @genres %>
+      <h4>Genres</h4>
+      <ul>
+        <% @genres.each do |genre|%>
+          <li><%= genre.name %></li>
+        <% end %>
+      </ul>
+    <% end %>
   </aside>
 </section>
 
